@@ -27,6 +27,7 @@
               <div class="name">
                 <h3 class="title">{{ $product->name }}</h3>
                 <h6>{{ $product->category->name }}</h6>
+                <h6>Precio: ${{ $product->price }}</h6>
                 {{-- <a href="#pablo" class="btn btn-just-icon btn-link btn-dribbble"><i class="fa fa-dribbble"></i></a>
                     <a href="#pablo" class="btn btn-just-icon btn-link btn-twitter"><i class="fa fa-twitter"></i></a>
                     <a href="#pablo" class="btn btn-just-icon btn-link btn-pinterest"><i class="fa fa-pinterest"></i></a> --}}
@@ -34,6 +35,7 @@
             </div>
           </div>
         </div>
+
         <div class="description text-center">
           <p>{{ $product->long_description }} </p>
         </div>

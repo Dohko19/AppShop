@@ -96,7 +96,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNV43SO3jpT443KSpTkH1kY1IkEqSpxYE"></script>
   <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
   <script src="{{ asset('js/material-kit.js?v=2.0.5') }}" type="text/javascript"></script>
-  @yield('scripts')
+  @stack('scripts')
 </body>
 
 </html>

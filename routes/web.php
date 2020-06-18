@@ -15,6 +15,7 @@ Route::get('/products/{id}', 'ProductController@show');
 Route::get('/categories/{category}', 'CategoryController@show');
 
 Route::post('/cart', 'CartDetailController@store');
+Route::put('cart/{cart}', 'CartDetailController@update')->name('cart.update');
 Route::delete('/cart', 'CartDetailController@destroy');
 
 Route::post('/order', 'CartController@update');

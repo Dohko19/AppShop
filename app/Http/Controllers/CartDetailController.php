@@ -101,11 +101,15 @@ class CartDetailController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $cartDetail = CartDetail::findOrFail($request->id);
+        $cartDetail->quantity = $request->quantity;
+        $cartDetail->save();
+        $notification = "Tu Carrito de compras se actualizo correctamente";
+        return back()->with(compact('notification'));
     }
 
     /**
