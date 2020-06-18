@@ -17,6 +17,7 @@ class AddFieldsToUsers extends Migration
             $table->string('phone')->nullable;
             $table->string('address')->nullable;
             $table->string('username');
+            $table->boolean('admin');
         });
     }
 

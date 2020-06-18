@@ -35,18 +35,43 @@ class CartDetailController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
+        $encuentra = CartDetail::select('product_id')->where('product_id', $request->product_id)
+            ->where('cart_id', '=', auth()->user()->cart->id)->first();
 
-        $cartDetail = new CartDetail();
-        $cartDetail->cart_id = auth()->user()->cart->id;
-        $cartDetail->product_id = $request->product_id;
-        $cartDetail->quantity = $request->quantity;
-        $cartDetail->save();
-        $notification = 'El Producto se a cargado a tu carrito de compras exitosamente';
-        return back()->with(compact('notification'));
+        if ($encuentra)
+        {
+            if ($encuentra->product_id == $request->product_id)
+            {
+                $notification_fail = 'Este producto ya se encuentra agergado en tu carrito de compras';
+                return back()->with(compact('notification_fail'));
+
+            }
+            else
+            {
+                $cartDetail = new CartDetail();
+                $cartDetail->cart_id = auth()->user()->cart->id;
+                $cartDetail->product_id = $request->product_id;
+                $cartDetail->quantity = $request->quantity;
+                $cartDetail->save();
+                $notification = 'El Producto se a cargado a tu carrito de compras exitosamente';
+                return back()->with(compact('notification'));
+            }
+        }
+        else
+        {
+            $cartDetail = new CartDetail();
+            $cartDetail->cart_id = auth()->user()->cart->id;
+            $cartDetail->product_id = $request->product_id;
+            $cartDetail->quantity = $request->quantity;
+            $cartDetail->save();
+            $notification = 'El Producto se a cargado a tu carrito de compras exitosamente';
+            return back()->with(compact('notification'));
+        }
+            return redirect('home');
     }
 
     /**

@@ -17,7 +17,13 @@
                     {{ session('notification') }}
                 </div>
               @endif
-
+                @if (session('notification_fail'))
+                    <div class="alert alert-warning" role="alert">
+                        {{ session('notification_fail') }}
+                        <br><br>
+                        <a href="{{ route('home') }}">Ir a mi Carrito de compras</a>
+                    </div>
+                @endif
               <div class="name">
                 <h3 class="title">{{ $product->name }}</h3>
                 <h6>{{ $product->category->name }}</h6>
@@ -77,6 +83,7 @@
       <form method="POST" action="{{ url('/cart') }}">
         @csrf
         <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <input type="hidden" name="price" value="{{ $product->price }}">
       <div class="modal-body">
         <input class="form-control" type="number" name="quantity" value="1">
       </div>
