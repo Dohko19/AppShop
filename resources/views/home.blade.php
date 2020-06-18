@@ -71,6 +71,8 @@
                                         class="btn btn-danger btn-round btn-sm">
                                             <i class="material-icons">close</i>
                                         </button>
+                                        <a href="#" data-toggle="modal"></a>
+{{--                                        Modal agregar detalle https://youtu.be/Q2sXw_RCbis--}}
                                     </form>
                                 </td>
                             </tr>
@@ -135,9 +137,8 @@
                     @endforeach
                 </table>
         </div>
-    </div>
+        </div>
       </div>
-
     </div>
   </div>
 @include('includes.footer')
