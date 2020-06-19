@@ -7,7 +7,14 @@
      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
-
+/*MAIL_MAILER=smtp*/
+/*            MAIL_HOST=smtp.gmail.com*/
+/*                      MAIL_PORT=587*/
+/*MAIL_USERNAME=daniel.rojas.art93@gmail.com*/
+/*MAIL_PASSWORD=omfqcywirthjnpnd*/
+/*MAIL_ENCRYPTION=tls*/
+/*MAIL_FROM_ADDRESS='no-reply@mejorservicio.com.mx'*/
+/*MAIL_FROM_NAME="${APP_NAME}"*/
 .tt-hint {
   color: #999
 }
