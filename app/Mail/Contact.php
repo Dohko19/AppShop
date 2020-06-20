@@ -2,28 +2,24 @@
 
 namespace App\Mail;
 
-use App\Cart;
-use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewOrder extends Mailable
+class Contact extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
-    public $cart;
+    public $data;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, Cart $cart)
+    public function __construct($data)
     {
-        $this->user = $user;
-        $this->cart = $cart;
+        $this->data = $data;
     }
 
     /**
@@ -33,7 +29,7 @@ class NewOrder extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.new-order')
-            ->subject('Un cliente a realizado un nuevo pedido');
+        return $this->markdown('emails.contact')
+            ->subject('Tienes un mensaje nuevo desde tu pagina web');
     }
 }

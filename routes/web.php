@@ -1,6 +1,5 @@
 <?php
 Auth::routes();
-
 Route::get('/', 'TestController@welcome')->name('inicio');
 // Route::get('/', function () {
 //     return view('welcome');
@@ -17,6 +16,7 @@ Route::get('/categories/{category}', 'CategoryController@show');
 Route::post('/cart', 'CartDetailController@store');
 Route::put('cart/{cart}', 'CartDetailController@update')->name('cart.update');
 Route::delete('/cart', 'CartDetailController@destroy');
+Route::put('/cart', 'CartDetailController@destroy');
 
 Route::post('/order', 'CartController@update');
 
@@ -44,4 +44,7 @@ Route::post('/categories', 'CategoryController@store'); //registrar
 Route::get('/categories/{category}/edit', 'CategoryController@edit'); //EDITAR
 Route::post('/categories/{category}/edit', 'CategoryController@update'); //actualizar
 Route::delete('/categories/{category}', 'CategoryController@destroy');
+
+Route::get('orders/{id}', 'CartController@show');
+Route::put('order/{id} ', 'CartController@setStatus')->name('orders.status');
 });

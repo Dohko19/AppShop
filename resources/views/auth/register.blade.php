@@ -1,10 +1,18 @@
 @extends('layouts.app')
 @section('body-class', 'login-page sidebar-collapse')
 @section('content')
-<div class="page-header header-filter" style="background-image: url('{{ asset('img/Pinata03.jpg ') }}'); background-size: cover; background-position: top center;">
+    <style>
+        @media screen and (max-width: 767px){
+            .login-page .page-header>.container {
+                padding-top: 50vh;
+                margin-top: 231px;
+            }
+        }
+    </style>
+<div class="page-header header-filter" style="background-image: url('{{ asset('img/Pinata03.jpg ') }}'); ">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+        <div class="col-lg-4 col-md-6 col-sm-12 ml-auto mr-auto">
           <div class="card card-login">
             @if( $errors->any())
               <div class="alert alert-danger">

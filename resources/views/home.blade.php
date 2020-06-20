@@ -136,10 +136,6 @@
                                     </tr>
                                 </tbody>
                             @endforeach
-                        @else
-                            <div class="text-center">
-                                Aun no haz realizado Pedidos, comienza aqui <a href="{{ route('inicio') }}">Empezar a Pedir</a>
-                            </div>
                         @endif
                     @endforeach
                 </table>

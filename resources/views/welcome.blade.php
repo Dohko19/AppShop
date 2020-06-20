@@ -7,14 +7,7 @@
      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
-/*MAIL_MAILER=smtp*/
-/*            MAIL_HOST=smtp.gmail.com*/
-/*                      MAIL_PORT=587*/
-/*MAIL_USERNAME=daniel.rojas.art93@gmail.com*/
-/*MAIL_PASSWORD=omfqcywirthjnpnd*/
-/*MAIL_ENCRYPTION=tls*/
-/*MAIL_FROM_ADDRESS='no-reply@mejorservicio.com.mx'*/
-/*MAIL_FROM_NAME="${APP_NAME}"*/
+
 .tt-hint {
   color: #999
 }
@@ -155,43 +148,8 @@
           </div>
         </div>
       </div>
-      <div class="section section-contacts">
-        <div class="row">
-          <div class="col-md-8 ml-auto mr-auto">
-            <h2 class="text-center title">Contactanos</h2>
-            <h4 class="text-center description">
-                Usa este medio para enviar tud dudas, comentarios o problemas con algun pedido.
-                En breve te responderemos.
-            </h4>
-            <form class="contact-form">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="bmd-label-floating">Your Name</label>
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="bmd-label-floating">Your Email</label>
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="exampleMessage" class="bmd-label-floating">Your Message</label>
-                <textarea type="email" class="form-control" rows="4" id="exampleMessage"></textarea>
-              </div>
-              <div class="row">
-                <div class="col-md-4 ml-auto mr-auto text-center">
-                  <button class="btn btn-primary btn-raised">
-                    Send Message
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+      <div id="app">
+          <contact></contact>
       </div>
     </div>
   </div>

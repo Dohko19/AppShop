@@ -3,26 +3,25 @@
 namespace App\Mail;
 
 use App\Cart;
-use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewOrder extends Mailable
+class ConfirmOrder extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
     public $cart;
+    public $id;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, Cart $cart)
+    public function __construct(Cart $cart, $id)
     {
-        $this->user = $user;
+        $this->id = $id;
         $this->cart = $cart;
     }
 
@@ -33,7 +32,7 @@ class NewOrder extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.new-order')
-            ->subject('Un cliente a realizado un nuevo pedido');
+        return $this->markdown('emails.confirm-order')
+            ->subject('Uno de tus pedidos fue confirmado');
     }
 }

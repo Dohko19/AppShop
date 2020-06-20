@@ -1,4 +1,4 @@
- @extends('layouts.app')
+@extends('layouts.app')
 @section('title', 'App Shop | Dashboard')
 @section('body-class', 'profile-page sidebar-collapse')
 @section('content')

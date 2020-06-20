@@ -4,7 +4,7 @@
 <div class="page-header header-filter" style="background-image: url('{{ asset('img/Pinata02.jpg ') }}'); background-size: cover; background-position: top center;">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+        <div class="col-lg-4 col-md-6 col-sm-12 ml-auto mr-auto">
           <div class="card card-login">
             <form method="POST" action="{{ route('login') }}" class="form">
                  @csrf
@@ -75,7 +75,7 @@
               </div>
                @if (Route::has('password.request'))
                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
+                    {{ __('Olvidaste tu contraseña?') }}
                 </a>
                @endif
             </form>
