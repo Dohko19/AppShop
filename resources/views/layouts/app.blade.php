@@ -84,9 +84,9 @@
  </div>
     <script src="{{ asset('js/app.js') }}"></script>
   <!--   Core JS Files   -->
-  <script src="{{ asset('js/core/jquery.min.js') }}" type="text/javascript"></script>
+  {{-- <script src="{{ asset('js/core/jquery.min.js') }}" type="text/javascript"></script> --}}
   {{-- <script src="{{ asset('js/core/popper.min.js') }}" type="text/javascript"></script> --}}
-  {{-- <script src="{{ asset('js/core/bootstrap-material-design.min.js') }}" type="text/javascript"></script> --}}
+  <script src="{{ asset('js/core/bootstrap-material-design.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('js/plugins/moment.min.js') }}"></script>
   <!--  Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
   <script src="{{ asset('js/plugins/bootstrap-datetimepicker.js') }}" type="text/javascript"></script>

@@ -21,8 +21,10 @@ class TestController extends Controller
     {
         if (request()->wantsJson())
         {
-            $data = $request->all();
-            Mail::to(['danielkage9@gmail.com'])->send(new Contact($data));
+            $name = $request->name;
+            $email = $request->email;
+            $message = $request->message;
+            Mail::to(['danielkage9@gmail.com'])->send(new Contact($name, $email, $message));
 
         }
     }
