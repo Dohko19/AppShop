@@ -32,13 +32,15 @@
         <div class="tab-pane active" id="dashboard-1">
             <hr>
             <p>Tu carrito de Compras Presenta <b>{{ auth()->user()->cart->details->count() }}</b> Producto</p>
-             <table class="table">
+            <div class="table-responsive">
+                 <table class="table">
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
                                 <th>Nombre</th>
                                 <th>Precio</th>
                                 <th>Cantidad</th>
+                                <th>Comentarios/Detalles</th>
                                 <th>Sub Total</th>
                                 <th>Opciones</th>
                             </tr>
@@ -55,6 +57,7 @@
                                  <td>$ {{ $detail->product->price }}</td>
                                  {{-- <input type="hidden" id="quantity" value="{{ $detail->quantity }}"> --}}
                                  <td>{{ $detail->quantity }}</td>
+                                 <td>{{ $detail->comment }}</td>
                                  <td>$ {{ $detail->quantity * $detail->product->price }}</td>
                                 <td class="td-actions">
                                     <form method="POST" action="{{ url('/cart/') }}">
@@ -76,6 +79,7 @@
                                         data-id="{{ $detail->id }}"
                                         data-quantity="{{ $detail->quantity }}"
                                         data-productname="{{ $detail->product->name }}"
+                                        data-comment="{{ $detail->comment }}"
                                         title="Agregar mas productos">
                                           <i class="material-icons">add_shopping_cart</i>
                                         <div class="ripple-container"></div></a>
@@ -86,19 +90,26 @@
                         </tbody>
                         @endforeach
                     </table>
-                    <p><strong>Importe a pagar:</strong>$ {{ auth()->user()->cart->total }}</p>
-                        <div class="text-center">
-                            <form method="POST" action="{{ url('/order') }}">
-                                @csrf
-                                <button class="btn btn-primary btn-round">
-                                    <i class="material-icons">done</i> Realizar Pedido
-                                </button>
-                            </form>
-                        </div>
+            </div>
+            <p><strong>Importe a pagar:</strong>$ {{ auth()->user()->cart->total }}</p>
+            @if(auth()->user()->cart->details->count() != 0)
+            <div class="text-center">
+                <form method="POST" action="{{ url('/order') }}">
+                    @csrf
+                    <button class="btn btn-primary btn-round">
+                        <i class="material-icons">done</i> Realizar Pedido
+                    </button>
+                </form>
+            </div>
+            @else
+                <div class="text-center font-weight-bold">
+                    Tu carrito de compras esta vacio
+                </div>
+            @endif
         </div>
         <div class="tab-pane" id="tasks-1">
             <h2>Mis Pedidos Realizados</h2>
-
+            <div class="table-responsive">
                 <table class="table">
                     <thead>
                     <tr>
@@ -109,11 +120,12 @@
                         <th>Nombre</th>
                         <th>Precio</th>
                         <th>Cantidad</th>
+                        <th>Cantidad</th>
                         <th>Sub Total</th>
                     </tr>
                     </thead>
                     @foreach(auth()->user()->carts as $cart)
-                        @if($cart->status == 'Pending')
+                        @if($cart->status == 'Pending' || $cart->status == 'Completado')
                             @foreach ($cart->details as $detail)
                                 <tbody>
                                     <tr>
@@ -121,7 +133,7 @@
                                             {{ $cart->id }}
                                         </td>
                                         <td>
-                                            {{ $cart->order_date }}
+                                            {{ $cart->created_at }}
                                         </td>
                                         <td>{{ $cart->status }}</td>
                                         <td class="text-center">
@@ -139,6 +151,7 @@
                         @endif
                     @endforeach
                 </table>
+            </div>
         </div>
         </div>
       </div>
@@ -158,7 +171,7 @@
             @method('PUT')
             <input type="hidden" name="id" id="id">
             <input type="number" min="0" name="quantity" class="form-control" id="quantity">
-
+            <textarea name="comment" id="comment" cols="10" rows="5" class="form-control"></textarea>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Save changes</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -177,11 +190,13 @@
   var id = button.data('id') // Extract info from data-* attributes
   var quantity = button.data('quantity') // Extract info from data-* attributes
   var productname = button.data('productname') // Extract info from data-* attributes
+  var comment = button.data('comment') // Extract info from data-* attributes
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   modal.find('.modal-body #id').val(id);
   modal.find('.modal-body #quantity').val(quantity);
+  modal.find('.modal-body #comment').val(comment);
   modal.find('.modal-title').text('Modificar Cantidad del Articulo ' + productname);
 })
 </script>

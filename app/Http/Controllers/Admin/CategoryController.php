@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use File;
+use Intervention\Image\Facades\Image;
 
 class CategoryController extends Controller
 {
@@ -34,7 +34,7 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
@@ -44,15 +44,14 @@ class CategoryController extends Controller
         if($request->hasfile('image'))
         {
             $file = $request->file('image');
-            $path = public_path() . '/images/categories';
-            $fileName = uniqid() .'-'. $file->getClientOriginalName();
-            $moved = $file->move($path, $fileName);
-                if ($moved)
-                {
-                    $category->image = $fileName;
+            $fileName = uniqid() . $file->getClientOriginalName();
+
+//            $thumbnail = public_path('storage/images/categories/'.$fileName);
+//            $img = Image::make($thumbnail)->resize(250, 250)->save($thumbnail);
+//        Image::make($image)
+                    $category->image = $file->storeAs('public/images/categories', $fileName);
                     // $productImage->featured = false;
                     $category->save();
-                }
         }
         return redirect('/admin/categories');
     }
@@ -89,26 +88,26 @@ class CategoryController extends Controller
      */
     public function update(Request $request,Category $category)
     {
-  
+
         $this->validate($request, Category::$rules, Category::$messages);
         $category->update($request->only('name', 'description'));
         if($request->hasfile('image'))
         {
             $file = $request->file('image');
-            $path = public_path() . '/images/categories';
-            $fileName = uniqid() .'-'. $file->getClientOriginalName();
-            $moved = $file->move($path, $fileName);
-                if ($moved)
-                {
-                    $previousPath = $path . '/'. $category->image;
-                    $category->image = $fileName;
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+
+//            $thumbnail = public_path('storage/images/categories/'.$fileName);
+//            $img = Image::make($thumbnail)->resize(250, 250)->save($thumbnail);
+
+                    $previusPath = $category->image;
+                    $category->image = $file->storeAs('public/images/categories', $fileName);
                     // $productImage->featured = false;
                     $saved = $category->save();
                     if ($saved) {
-                    File::delete($previousPath);
+                        \Storage::delete('public/images/categories/'.$previusPath);
+//                    File::delete($previousPath);
                     }
                 }
-        }
 
         return redirect("/admin/categories");
     }
@@ -116,11 +115,12 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $category
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Category $category)
     {
+        \Storage::delete('public/images/categories/'.$category->image);
         $category->delete();
         return back();
     }

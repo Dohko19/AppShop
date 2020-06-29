@@ -41,9 +41,15 @@
         </div>
 
         <div class="text-center">
-        <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#ModalAddtoCart">
-          <i class="material-icons">add</i> Añadir al Carrito de Compras
-        </button>
+            @if(Auth::check())
+                <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#ModalAddtoCart">
+                  <i class="material-icons">add</i> Añadir al Carrito de Compras
+                </button>
+            @else
+                <b><p>Tienes que <a href="{{ route('login') }}">Iniciar sesion</a> o
+                        <a href="{{ route('register') }}">Registrarte</a> Para poder comprar algun producto</p></b>
+            @endif
+
         </div>
         <div class="row">
           <div class="col-md-6 ml-auto mr-auto">
@@ -88,6 +94,8 @@
         <input type="hidden" name="price" value="{{ $product->price }}">
       <div class="modal-body">
         <input class="form-control" type="number" name="quantity" value="1">
+          <textarea name="comment" id="comment" cols="10" rows="10" class="form-control"
+                    placeholder="Añade mas detalles para tu producto, ej. Picante extra, aderezos aparte..."></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

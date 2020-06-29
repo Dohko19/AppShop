@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/apple-icon.png') }}">
-  <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     @yield('title', config('app.name'))
@@ -23,65 +23,76 @@
 </head>
 
 <body class="@yield('body-class')">
-    <div class="container">
+{{--<div class="container">--}}
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
-      <div class="navbar-translate">
-        <a class="navbar-brand" href="{{ url('/') }}">
-          {{ config('app.name') }} </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
-          <li class="dropdown nav-item">
-           @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Ingresar') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
-                                </li>
+      <div class="container">
+          <div class="navbar-translate">
+            <a class="navbar-brand" href="{{ url('/') }}">
+              {{ config('app.name') }} </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+              <li class="dropdown nav-item">
+               @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Ingresar') }}</a>
+                    </li>
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
+                        </li>
+                    @endif
+               @else
+                   @if(auth()->user()->admin != true)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}">{{ __('Ir a mi Carrito de Compras') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('inicio') }}">{{ __('Ir de compras') }}</a>
+                    </li>
+                    @endif
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            @if(!auth()->user()->admin)
+                            <a class="dropdown-item" href="{{ url('/home') }}">Dashboard</a>
                             @endif
-                        @else
-
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                                    <a class="dropdown-item" href="{{ url('/home') }}">Dashboard</a>
-
-                                       @if(auth()->user()->admin)
-                                        <a class="dropdown-item" href="{{ url('/admin/products') }}">Gestionar Productos</a>
-                                        <a class="dropdown-item" href="{{ url('/admin/categories') }}">Gestionar Categorias</a>
-                                       @endif
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Cerrar Sesión') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-          </li>
-
-        </ul>
+                            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}">Editar mi perfil</a>
+                               @if(auth()->user()->admin)
+                                <a class="dropdown-item" href="{{ route('orders.index')  }}">Listado de mis Pedidos</a>
+                                <a class="dropdown-item" href="{{ url('/admin/categories') }}">Gestionar Categorias</a>
+                                <a class="dropdown-item" href="{{ url('/admin/products') }}">Gestion de Productos</a>
+                               @endif
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                {{ __('Cerrar Sesión') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endguest
+              </li>
+            </ul>
+          </div>
       </div>
-    </div>
   </nav>
+
+{{--</div>--}}
+
     @yield('content')
 
- </div>
     <script src="{{ asset('js/app.js') }}"></script>
   <!--   Core JS Files   -->
   {{-- <script src="{{ asset('js/core/jquery.min.js') }}" type="text/javascript"></script> --}}

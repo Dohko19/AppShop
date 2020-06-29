@@ -5,16 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\ProductImage;
-use Intervention\Image\Facades\Image;
 use File;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index($id)
     {
@@ -38,25 +38,33 @@ class ImageController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, $id)
     {
-        $file = $request->file('photo');
-        $path = public_path() . '/images/products';
-        $fileName = uniqid() . $file->getClientOriginalName();
-        Image::make($request->file('photo'))
-        ->resize(250, 250)
-        ->save(public_path() . '/images/products/' . $fileName);
-        $moved = $file->move($path, $fileName);
-        if ($moved)
-        {
+        $this->validate($request, [
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $image = $request->file('photo');
+        $fileName = uniqid() . $image->getClientOriginalName();
+//        $file = $request->file('photo');
+//        $path = public_path() . '/images/products';
+//        $fileName = uniqid() . $file->getClientOriginalName();
+
+
+//        $thumbnail = public_path('storage/images/products/'.$fileName);
+//        $img = Image::make($thumbnail)->resize(250, 250)->save($thumbnail);
+//        Image::make($image)
+//        ->resize(250, 250);
+//        $moved = $file->move($path, $fileName);
+//        if ($moved)
+//        {
         $productImage = new ProductImage;
-        $productImage->image = $fileName;
+        $productImage->image = $image->storeAs('public/images/products', $fileName);
         // $productImage->featured = false;
         $productImage->product_id = $id;
         $productImage->save();
-        }
+//        }
         return back();
     }
 
@@ -109,8 +117,7 @@ class ImageController extends Controller
         }
         else
         {
-        $fullPath = public_path() . '/images/products/' . $productImage->image;
-        $deleted = File::delete($fullPath);
+       $deleted = \Storage::delete($productImage->image);
         }
         if ($deleted)
         {

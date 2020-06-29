@@ -50,10 +50,10 @@
                 send: false,
                 working: false,
                 form: {
-                    name: 'Daniel',
-                    email: 'daniel@email.com',
-                    subject: 'Asunto',
-                    message: 'Cuerpo del Mensaje'
+                    name: '',
+                    email: '',
+                    subject: '',
+                    message: ''
                 }
             }
         },

@@ -33,7 +33,7 @@
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <img src="{{ $i->url }}" width="250">
+                        <img src="{{ $i->img }}" width="250">
                         <form method="POST" action="">
                             @csrf
                             {{ method_field('DELETE') }}

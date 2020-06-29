@@ -68,7 +68,6 @@
                         </span>
                     </label>
                 </div>
-                <br>
               </div>
               <div class="footer text-center">
                 <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Ingresar</button>

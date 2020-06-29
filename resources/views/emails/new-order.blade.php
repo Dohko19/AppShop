@@ -21,6 +21,8 @@ Ver detalles del pedido
 @foreach($cart->details as $detail)
     <li>
         {{ $detail->product->name }} x {{ $detail->quantity }} ($ {{ $detail->quantity * $detail->product->price }})
+        <br>
+        Comentarios Adicionales: {{ $detail->comment }}
     </li>
 @endforeach
 </ul>

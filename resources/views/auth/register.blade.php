@@ -76,8 +76,8 @@
                       <i class="material-icons">phone</i>
                     </span>
                   </div>
-                  {{-- <input type="email" class="form-control" placeholder="Email..."> --}}
-                   <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Dirección">
+                   <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}"
+                          required autocomplete="phone" placeholder="Dirección">
                     @error('phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -90,7 +90,6 @@
                       <i class="material-icons">home</i>
                     </span>
                   </div>
-                  {{-- <input type="email" class="form-control" placeholder="Email..."> --}}
                    <input id="address" type="address" class="form-control" name="address" value="{{ old('address') }}" required autocomplete="address" placeholder="Telefono">
                     @error('address')
                                     <span class="invalid-feedback" role="alert">

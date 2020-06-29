@@ -4,6 +4,7 @@ namespace App;
 
 use App\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Category extends Model
 {
@@ -26,7 +27,7 @@ class Category extends Model
     public function getFeaturedImageUrlAttribute()
     {
         if($this->image)
-            return '/images/categories/'.$this->image;
+            return Storage::url($this->image);
         $firstProduct = $this->products()->first();
             if($firstProduct)
                 return $firstProduct->featured_image_url;

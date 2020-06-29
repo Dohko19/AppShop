@@ -56,6 +56,7 @@ class CartDetailController extends Controller
                 $cartDetail->cart_id = auth()->user()->cart->id;
                 $cartDetail->product_id = $request->product_id;
                 $cartDetail->quantity = $request->quantity;
+                $cartDetail->comment = $request->comment;
                 $cartDetail->save();
                 $notification = 'El Producto se a cargado a tu carrito de compras exitosamente';
                 return back()->with(compact('notification'));
@@ -67,6 +68,7 @@ class CartDetailController extends Controller
             $cartDetail->cart_id = auth()->user()->cart->id;
             $cartDetail->product_id = $request->product_id;
             $cartDetail->quantity = $request->quantity;
+            $cartDetail->comment = $request->comment;
             $cartDetail->save();
             $notification = 'El Producto se a cargado a tu carrito de compras exitosamente';
             return back()->with(compact('notification'));
@@ -107,6 +109,7 @@ class CartDetailController extends Controller
     {
         $cartDetail = CartDetail::findOrFail($request->id);
         $cartDetail->quantity = $request->quantity;
+        $cartDetail->comment = $request->comment;
         $cartDetail->save();
         $notification = "Tu Carrito de compras se actualizo correctamente";
         return back()->with(compact('notification'));

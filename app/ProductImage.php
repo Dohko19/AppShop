@@ -4,6 +4,7 @@ namespace App;
 
 use App\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class ProductImage extends Model
 {
@@ -17,6 +18,6 @@ class ProductImage extends Model
 		{
 			return $this->image;
 		}
-		return '/images/products/' . $this->image;
+		return Storage::url($this->image);
 	}
 }

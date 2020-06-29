@@ -45,6 +45,10 @@ Route::get('/categories/{category}/edit', 'CategoryController@edit'); //EDITAR
 Route::post('/categories/{category}/edit', 'CategoryController@update'); //actualizar
 Route::delete('/categories/{category}', 'CategoryController@destroy');
 
-Route::get('orders/{id}', 'CartController@show');
+Route::get('orders', 'CartController@index')->name('orders.index');
+Route::get('orders/{id}', 'CartController@show')->name('orders.show');
 Route::put('order/{id} ', 'CartController@setStatus')->name('orders.status');
+Route::put('order/status/{cart} ', 'CartController@setStatusComplete')->name('orders.status.complete');
+
+Route::resource('users', 'UserController', ['only' => ['edit', 'update', 'show']]);
 });

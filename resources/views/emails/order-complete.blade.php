@@ -1,13 +1,12 @@
 @component('mail::message')
-# Tu pedido con numero {{ $id }} fue confirmado
+# Tu Pedido con numero '{{ $cart->id }}' ya fue entregado
 
-El negocio esta preparando tu pedido, puedes ver los detalles de tu pedido pulsando el siguiente boton.
+# Gracias por tu pedido, {{ $cart->user->name }}
 
-@component('mail::button', ['url' => url('/home')])
-    Ver mas...
-@endcomponent
+<h1> Total: {{ $cart->total }}</h1>
 
 # Detalles del Pedido
+<br>
 <ul>
     @foreach($cart->details as $detail)
         <li>
@@ -18,8 +17,6 @@ El negocio esta preparando tu pedido, puedes ver los detalles de tu pedido pulsa
     @endforeach
 </ul>
 
-
-
-Gracias por tu Preferencia,<br>
+Gracias por comprar con nosotros,<br>
 {{ config('app.name') }}
 @endcomponent

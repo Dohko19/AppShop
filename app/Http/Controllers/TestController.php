@@ -25,7 +25,6 @@ class TestController extends Controller
             $email = $request->email;
             $message = $request->message;
             Mail::to(['danielkage9@gmail.com'])->send(new Contact($name, $email, $message));
-
         }
     }
 }
