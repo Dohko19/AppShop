@@ -86,7 +86,7 @@
                 </div>
                 <h4 class="info-title">Chat Libre</h4>
                 <p>
-                    Chatea con nosotros en linea.
+                    Chatea con nosotros en <b>linea</b>.
                 </p>
               </div>
             </div>
@@ -114,15 +114,15 @@
         </div>
       </div>
       <div class="section text-center">
-        <h2 class="title">Visita Nuestras Categorias</h2>
-        <center>
-        <form action="{{ url('/search') }}" class="form-inline align-content-center" method="GET">
-          <input type="text" class="form-control typeahead" placeholder="¿Que Producto Buscas?" name="query" id="search">
+        <h2 class="title">Visita nuestras categorias</h2>
+
+        <form action="{{ url('/search') }}" class="form-inline align-content-center text-center" method="GET">
+          <input type="text" class="form-control typeahead" placeholder="¿Qué producto buscas?" name="query" id="search">
           <button type="submit" class="btn btn-primary btn-just-icon">
             <i class="material-icons">search</i>
           </button>
         </form>
-        </center>
+
         <div class="team">
           <div class="row">
             @foreach($categories as $category)
@@ -130,7 +130,7 @@
               <div class="card team-player">
                 <div class="card card-plain">
                   <div class="col-md-6 ml-auto mr-auto">
-                    <img src="{{ $category->featured_image_url  }}" alt="Imagen representativa de la categoria  " class="img-raised rounded-circle img-fluid" width="250">
+                    <img src="{{ $category->featured_image_url  }}" alt="Imagen representativa de la categoria  " class="img-raised rounded-circle img-fluid" width="250px" height="250px">
                   </div>
                   <h4 class="card-title">
                     <a href="{{ url('/categories/'.$category->id) }}">

@@ -20,7 +20,7 @@
                     </div>
                 @endif
             <div class="section ">
-                <h2 class="title text-center">Editar mi Perfil</h2>
+                <h2 class="title text-center">Editar mi perfil</h2>
                 <form method="POST" action="{{ route('users.update', $user) }}">
                     @csrf
                     @method('PUT')
@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label class="control-label">Email</label>
+                                <label class="control-label">Correo electrónico</label>
                                 <input type="email" value="{{ old('email',$user->email)}}" name="email" class="form-control" />
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label class="control-label">Direccion de Envio</label>
+                                <label class="control-label">Dirección de envío</label>
                                 <input name="address" type="text" class="form-control" value="{{ old('address', $user->address) }}">
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">
@@ -85,7 +85,7 @@
                     <div class="form-group">
                         <label for="password">Contraseña</label>
                         <div class="input-group @error('password') is-invalid @else is-valid @enderror">
-                            <input placeholder="Password" name="password" type="password" class="form-control">
+                            <input placeholder="" name="password" type="password" class="form-control">
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
@@ -99,7 +99,7 @@
                             <input type="password"
                                    name="password_confirmation"
                                    class="form-control"
-                                   placeholder="Repite la Contraseña">
+                                   placeholder="">
                         </div>
                         <small style="color: red"> *Si no deseas cambiar tu contraseña no es necesario escribir algo</small>
                     </div>

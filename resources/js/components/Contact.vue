@@ -4,8 +4,8 @@
             <div class="col-md-8 ml-auto mr-auto">
                 <h2 class="text-center title">Contactanos</h2>
                 <h4 class="text-center description">
-                   Ponte en contacto directo con nostros para enviar comentarios
-                    informes sobre el sitio o solicitar nuestros servicios
+                   Ponte en contacto directo con nosotros para enviar comentarios, pedir informes
+                    sobre el sitio o solicitar nuestros servicios.
                 </h4>
                 <transition name="fade" mode="out-in">
                     <p v-if="send">Tu mensaje a sido recibido te contactaremos pronto</p>
@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="bmd-label-floating">Tu Correo</label>
+                                    <label class="bmd-label-floating">Correo electronico</label>
                                     <input v-model="form.email" class="form-control">
                                 </div>
                             </div>

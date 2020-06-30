@@ -51,7 +51,7 @@
                                         <a href="{{ route('orders.show', $order->id) }}" rel="tooltip" class="btn btn-info btn-round btn-sm"
                                         title="Ver mas..."> <i class="material-icons">visibility</i></a>
                                     </td>
-                                    @if($order->status == 'En Preparacion')
+                                    @if($order->status == 'Pending')
                                     <td>
                                         <form method="POST" action="{{ route('orders.status.complete', ['cart' => $order]) }}" style="display: inline">
                                             @csrf
@@ -62,10 +62,6 @@
                                         </form>
 
                                     </td>
-                                    @else
-                                        <td>
-                                            <span class="text-muted">Pedido Completado</span>
-                                        </td>
                                     @endif
                                 </tr>
                                 @endif
