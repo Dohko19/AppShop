@@ -17,6 +17,20 @@ class TestController extends Controller
         return view('welcome')->with(compact('categories'));
     }
 
+    public function categoriesShow()
+    {
+        $categories = Category::all();
+        if (request()->wantsJson())
+        {
+            return $categories;
+        }
+    }
+
+    public function spa()
+    {
+        return view('spa');
+    }
+
     public function contact(Request $request)
     {
         if (request()->wantsJson())

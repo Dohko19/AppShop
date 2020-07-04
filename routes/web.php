@@ -1,11 +1,12 @@
 <?php
 Auth::routes();
-Route::get('/', 'TestController@welcome')->name('inicio');
+//Route::get('/', 'TestController@welcome')->name('inicio');
+Route::get('/', 'TestController@spa')->name('inicio');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
-
+//sparoutes
+//finsparoutes
 Route::get('/search', 'SearchController@show');
 Route::get('/products/json', 'SearchController@data');
 
@@ -52,3 +53,5 @@ Route::put('order/status/{cart} ', 'CartController@setStatusComplete')->name('or
 
 Route::resource('users', 'UserController', ['only' => ['edit', 'update', 'show']]);
 });
+
+Route::get('/{any?}', 'TestController@spa')->name('inicio')->where('any', '.*');

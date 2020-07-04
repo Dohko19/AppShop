@@ -19,6 +19,9 @@ class Category extends Model
         ];
     protected $fillable = ['name', 'description'];
 
+    protected $appends = ['featured_image_url'];
+
+
     public function products()
     {
     	return $this->hasMany(Product::class);
@@ -27,11 +30,12 @@ class Category extends Model
     public function getFeaturedImageUrlAttribute()
     {
         if($this->image)
-            return Storage::url($this->image);
+            return \Storage::url($this->image);
         $firstProduct = $this->products()->first();
             if($firstProduct)
                 return $firstProduct->featured_image_url;
 
         return '/images/default.gif';
     }
+
 }

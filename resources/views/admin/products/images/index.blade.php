@@ -22,9 +22,12 @@
         <div class="team">
             <form method="POST" action="" enctype="multipart/form-data">
                 @csrf
-                <input type="file" name="photo" required>
-                <button type="submit" class="btn btn-primary btn-round">Subir Nueva Imagen</button>
-                <a href="{{ url('/admin/products') }}" class="btn btn-default btn-round">Volver al Listado de Productos</a>
+{{--                <input type="file" name="photo" required>--}}
+{{--                <button type="submit" class="btn btn-primary btn-round">Subir Nueva Imagen</button>--}}
+                <div class="form-group ">
+                    <div class="dropzone"></div>
+                </div>
+                <a href="{{ url('/admin/products') }}" class="btn btn-warning btn-round">Volver al Listado de Productos</a>
             </form>
 
             <hr>
@@ -33,7 +36,7 @@
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <img src="{{ $i->img }}" width="250">
+                        <img src="{{ Storage::url($i->image) }}" width="250px" height="250px">
                         <form method="POST" action="">
                             @csrf
                             {{ method_field('DELETE') }}
@@ -63,3 +66,29 @@
   </div>
 @include('includes.footer')
 @endsection
+@push('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
+
+@endpush
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+    <script>
+        var myDropzone = new Dropzone('.dropzone', {
+            url: '/admin/products/{{ $product->id }}/images',
+            paramName: 'photo',
+            acceptedFiles: 'image/*',
+            maxFilesize: 2,
+            maxFiles: 3,
+            resizeWidth: 250,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            dictDefaultMessage: 'Arrastra las fotos aqui para subirlas'
+        });
+        myDropzone.on('error', function(file, res){
+            var msg = res.errors.photo[0];
+            $('.dz-error-message:last > span').text(msg);
+        });
+        Dropzone.autoDiscover = false;
+    </script>
+@endpush

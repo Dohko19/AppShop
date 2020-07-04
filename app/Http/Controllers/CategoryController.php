@@ -42,11 +42,18 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function show(Category $category)
     {
         $products = $category->products()->paginate(10);
+
+        if (request()->wantsJson())
+        {
+            return ['products' => $products,
+                    'category' => $category
+                ];
+        }
         return view('categories.show')->with(compact('category', 'products'));
     }
 

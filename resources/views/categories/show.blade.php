@@ -43,7 +43,7 @@
               <div class="card team-player">
                 <div class="card card-plain">
                   <div class="col-md-6 ml-auto mr-auto">
-                    <img src="{{ $p->featured_image_url  }}" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid" width="250">
+                    <img src="{{ $p->featured_image_url  }}" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid" width="250px" height="250px">
                   </div>
                   <h4 class="card-title">
                     <a href="{{ url('/products/'.$p->id) }}">

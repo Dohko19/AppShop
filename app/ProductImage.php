@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductImage extends Model
 {
+    protected $appends = ['url'];
+
 	public function product()
 	{
 		return $this->belongsTo(Product::class);

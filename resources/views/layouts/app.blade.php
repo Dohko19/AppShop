@@ -18,12 +18,12 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   {{-- <link href="../assets/demo/demo.css" rel="stylesheet" /> --}}
   <link href="{{ asset('css/demo.css') }}" rel="stylesheet" />
-  @yield('styles')
+  @stack('styles')
 
 </head>
 
 <body class="@yield('body-class')">
-{{--<div class="container">--}}
+<div id="app">
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
       <div class="container">
           <div class="navbar-translate">
@@ -89,11 +89,11 @@
       </div>
   </nav>
 
-{{--</div>--}}
-
     @yield('content')
 
-    <script src="{{ asset('js/app.js') }}"></script>
+</div>
+
+<script src="{{ asset('js/app.js') }}"></script>
   <!--   Core JS Files   -->
   {{-- <script src="{{ asset('js/core/jquery.min.js') }}" type="text/javascript"></script> --}}
   {{-- <script src="{{ asset('js/core/popper.min.js') }}" type="text/javascript"></script> --}}

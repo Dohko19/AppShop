@@ -42,7 +42,7 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function show($id)
     {
@@ -60,6 +60,15 @@ class ProductController extends Controller
                 $imagesRigth->push($image);
             }
         }
+
+        if ( request()->wantsJson() )
+        {
+            return ['product' => $product,
+                    'imagesLeft' => $imagesLeft,
+                    'imagesRight' => $imagesRigth
+                ];
+        }
+
         return view('products.show')->with(compact('product', 'imagesLeft', 'imagesRigth'));
     }
 
