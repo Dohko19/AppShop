@@ -27,7 +27,8 @@
                             <div class="description text-center">
                                 <p>{{ product.long_description }} </p>
                             </div>
-                            <button class="btn btn-primary btn-round" @click="newCart">
+                            <button class="btn btn-primary btn-round" data-toggle="modal"
+                                    data-target="#ModalAddtoCart" @click="newCart">
                                 <i class="material-icons">add</i> Añadir al Carrito de Compras
                             </button>
                     </div>
@@ -104,12 +105,11 @@
             return {
                 product: {},
                 imagesLeft: [],
-                imagesRight: []
+                imagesRight: [],
             }
         },
         methods: {
             newCart(){
-                $('.modal-backdrop').remove()
                 $('#ModalAddtoCart').modal('show');
             },
         },

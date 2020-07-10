@@ -1,7 +1,7 @@
 <?php
 Auth::routes();
-//Route::get('/', 'TestController@welcome')->name('inicio');
-Route::get('/', 'TestController@spa')->name('inicio');
+Route::get('/', 'TestController@welcome')->name('inicio');
+//Route::get('/', 'TestController@spa')->name('inicio');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
