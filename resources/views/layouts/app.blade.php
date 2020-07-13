@@ -51,12 +51,47 @@
                @else
                    @if(auth()->user()->admin != true)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">{{ __('Ir a mi Carrito de Compras') }}</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('inicio') }}">{{ __('Ir de compras') }}</a>
                     </li>
                     @endif
+                    <li class="nav-item dropdown">
+                      <a id="navbarDropdownCart" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                      <span class="material-icons">
+                        shopping_cart
+                      </span>
+                      <span class="badge badge-info">{{ count(Auth::user()->cart->details) }}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownCart">
+
+                            @if(count(Auth::user()->cart->details) > 0 )
+                              @forelse(Auth::user()->cart->details as $detail)
+                              <div class="dropdown-item">
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <img src="{{ $detail->product->featured_image_url }}" width="30px" height="30px" alt="imagen de {{ $detail->product->name }}">
+                                  </div>
+                                  <div class="col-md-8">
+                                 {{ $detail->product->name }} &nbsp;<span class="pull-right badge badge-primary">{{ $detail->quantity }}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              @empty
+                              <div class="dropdown-item">
+                                No tienes productos en tu carrito de compras
+                              </div>
+                              @endforelse
+                              <div class="dropdown-item">
+                                Total: ${{ Auth::user()->cart->total }}
+                              </div>
+                              @else
+                              <div class="dropdown-item">
+                                No tienes productos en tu carrito de compras
+                              </div>
+                            @endif
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="{{ route('home') }}">{{ __('Ir a mi Carrito de Compras') }}</a>
+                        </div>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
