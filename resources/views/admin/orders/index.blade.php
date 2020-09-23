@@ -31,7 +31,7 @@
                             @forelse($orders as $order)
                                 @if($order->status == 'Pending' || $order->status == 'En Preparacion')
                                 <tr>
-                                    <td>{{ $order->id }}</td>
+                                    <td><a href="{{ route('orders.show', $order) }}">{{ $order->id }}</a></td>
                                     <td>{{ $order->status }}</td>
                                     <td>{{ $order->user->name }} <br>
                                         {{ $order->user->email }}
@@ -41,7 +41,7 @@
                                 @forelse($order->details as $detail)
                                     <td> Cantidad: {{ $detail->quantity }} <br>
                                          Producto: {{ $detail->product->name }} <br>
-                                         Precio: {{ $detail->product->price }} <br>
+                                         Precio: {{ $detail->price }} <br>
                                          Total: <b>{{ $order->total }}</b>
                                     </td>
                                     @empty

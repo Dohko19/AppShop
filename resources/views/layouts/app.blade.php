@@ -70,8 +70,19 @@
                                   <div class="col-md-4">
                                     <img src="{{ $detail->product->featured_image_url }}" width="30px" height="30px" alt="imagen de {{ $detail->product->name }}">
                                   </div>
-                                  <div class="col-md-8">
-                                 {{ $detail->product->name }} &nbsp;<span class="pull-right badge badge-primary">{{ $detail->quantity }}</span>
+                                  <div class="col-md-8 d-flex align-items-center">
+                                      <p>{{ $detail->product->name }}</p> &nbsp;<span class="pull-right align-items-center badge badge-primary">{{ $detail->quantity }}</span>
+                                      <div>
+                                          <form method="POST" action="{{ url('/cart/') }}">
+                                              @csrf
+                                              {{ method_field('DELETE') }}
+                                              <input id="cartid" type="hidden" name="cart_detail_id" value="{{ $detail->id }}">
+
+                                              <button type="submit" rel="tooltip" title="Eliminar del Carrito" class="btn btn-warning btn-primary btn-fab btn-fab-mini btn-round">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </form>
+                                      </div>
                                   </div>
                                 </div>
                               </div>
@@ -85,7 +96,7 @@
                               </div>
                               @else
                               <div class="dropdown-item">
-                                No tienes productos en tu carrito de compras
+                                No tienes productos en tu carrito de compras, <a href="{{ route('inicio') }}">Ir de Compras</a>
                               </div>
                             @endif
                           <div class="dropdown-divider"></div>

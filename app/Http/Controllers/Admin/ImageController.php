@@ -14,6 +14,7 @@ class ImageController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index($id)
@@ -39,6 +40,7 @@ class ImageController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request, $id)
     {

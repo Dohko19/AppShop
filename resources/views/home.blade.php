@@ -54,11 +54,11 @@
                                 <td>
                                     <a href="{{ url('/products/'.$detail->product->id) }}">{{ $detail->product->name }}</a>
                                 </td>
-                                 <td>$ {{ $detail->product->price }}</td>
+                                 <td>$ {{ $detail->price }}</td>
                                  {{-- <input type="hidden" id="quantity" value="{{ $detail->quantity }}"> --}}
                                  <td>{{ $detail->quantity }}</td>
                                  <td>{{ $detail->comment }}</td>
-                                 <td>$ {{ $detail->quantity * $detail->product->price }}</td>
+                                 <td>$ {{ $detail->quantity * $detail->price }}</td>
                                 <td class="td-actions">
                                     <form method="POST" action="{{ url('/cart/') }}">
                                         @csrf
@@ -91,7 +91,7 @@
                         @endforeach
                     </table>
             </div>
-            <p><strong>Importe a pagar:</strong>$ {{ auth()->user()->cart->total }}</p>
+            <p><strong>Importe a pagar:</strong><b>$ {{ auth()->user()->cart->total }}</b></p>
             @if(auth()->user()->cart->details->count() != 0)
             <div class="text-center">
                 <form method="POST" action="{{ url('/order') }}">
@@ -120,7 +120,6 @@
                         <th>Nombre</th>
                         <th>Precio</th>
                         <th>Cantidad</th>
-                        <th>Cantidad</th>
                         <th>Sub Total</th>
                     </tr>
                     </thead>
@@ -142,9 +141,9 @@
                                         <td>
                                             <a href="{{ url('/products/'.$detail->product->id) }}">{{ $detail->product->name }}</a>
                                         </td>
-                                        <td>$ {{ $detail->product->price }}</td>
+                                        <td>$ {{ $detail->price }}</td>
                                         <td>{{ $detail->quantity }}</td>
-                                        <td>$ {{ $detail->quantity * $detail->product->price }}</td>
+                                        <td>$ {{ $detail->quantity * $detail->price }}</td>
                                     </tr>
                                 </tbody>
                             @endforeach

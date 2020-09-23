@@ -35,14 +35,15 @@
             @foreach($images as $i)
             <div class="col-md-4">
                 <div class="panel panel-default">
-                    <div class="panel-body">
-                        <img src="{{ Storage::url($i->image) }}" width="250px" height="250px">
+                    <div class="panel-body align-items-center align-content-center" >
+                        <img src="{{ $i->product_image }}" width="250px" height="250px">
                         <form method="POST" action="">
                             @csrf
                             {{ method_field('DELETE') }}
                             <input type="hidden" name="image_id" value="{{ $i->id }}" required>
                         <button type="submit" class="btn btn-danger btn-round">Eliminar</button>
-                        @if($i->featured)
+                        </form>
+                    @if($i->featured)
                         <button class="btn btn-info btn-fab btn-fab-mini btn-round" rel="tooltip" title="Imagen Destacada Actual">
                           <i class="material-icons">favorite</i>
                         </button>
@@ -51,7 +52,6 @@
                           <i class="material-icons">favorite</i>
                         </a>
                         @endif
-                        </form>
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            dictDefaultMessage: 'Arrastra las fotos aqui para subirlas'
+            dictDefaultMessage: 'Arrastra las fotos aqui para subirlas o haz click aqui'
         });
         myDropzone.on('error', function(file, res){
             var msg = res.errors.photo[0];

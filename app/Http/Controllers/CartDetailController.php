@@ -57,6 +57,7 @@ class CartDetailController extends Controller
                 $cartDetail->product_id = $request->product_id;
                 $cartDetail->quantity = $request->quantity;
                 $cartDetail->comment = $request->comment;
+                $cartDetail->price = $request->price;
                 $cartDetail->save();
                 $notification = 'El Producto se a cargado a tu carrito de compras exitosamente';
                 return back()->with(compact('notification'));
@@ -69,6 +70,7 @@ class CartDetailController extends Controller
             $cartDetail->product_id = $request->product_id;
             $cartDetail->quantity = $request->quantity;
             $cartDetail->comment = $request->comment;
+            $cartDetail->price = $request->price;
             $cartDetail->save();
             $notification = 'El Producto se a cargado a tu carrito de compras exitosamente';
             return back()->with(compact('notification'));

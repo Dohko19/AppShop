@@ -4,11 +4,15 @@ namespace App;
 
 use App\Product;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
 class ProductImage extends Model
 {
-    protected $appends = ['url'];
+    protected $appends = ['url', 'product_image'];
+
+    public function getProductImageAttribute()
+    {
+        return \Storage::url($this->image);
+    }
 
 	public function product()
 	{
@@ -20,6 +24,6 @@ class ProductImage extends Model
 		{
 			return $this->image;
 		}
-		return Storage::url($this->image);
+		return \Storage::url($this->image);
 	}
 }

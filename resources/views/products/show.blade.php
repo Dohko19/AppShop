@@ -41,7 +41,7 @@
         </div>
 
         <div class="text-center">
-            @if(Auth::check())
+            @if(Auth::check() )
                 <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#ModalAddtoCart">
                   <i class="material-icons">add</i> Añadir al Carrito de Compras
                 </button>

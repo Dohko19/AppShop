@@ -13,7 +13,8 @@
                             <div class="alert alert-success" role="alert">
                                 {{ session('notification') }}
                             </div>
-                        @endif                            @foreach($orders as $order)
+                        @endif
+                            @foreach($orders as $order)
                             <div class="name">
                                 <h3 class="title">Detalles de la compra numero: {{ $id }}</h3>
                                 <h3 class="">Status: {{ $order->status }}</h3>
