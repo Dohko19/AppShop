@@ -14,7 +14,7 @@ class SearchController extends Controller
      */
     public function data()
     {
-        $products = Product::pluck('name');
+        $products = Product::where('active',1)->pluck('name');
         return $products;
     }
 
@@ -53,7 +53,7 @@ class SearchController extends Controller
     public function show(Request $request)
     {
         $query = $request->input('query');
-        $products = Product::where('name', 'like', "%$query%")->paginate(5);
+        $products = Product::where('name', 'like', "%$query%")->where('active', 1)->paginate(5);
         if ($products->count() == 1) {
             $id = $products->first()->id;
             return redirect("products/$id"); // es igual a '/products/'.$id

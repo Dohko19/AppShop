@@ -10,6 +10,7 @@ class Product extends Model
 {
 
     protected $appends = ['featured_image_url'];
+
 	public function category()
 	{
 		return $this->belongsTo(Category::class);
@@ -18,6 +19,11 @@ class Product extends Model
 	public function images()
 	{
 		return $this->hasMany(ProductImage::class);
+	}
+
+	public function scopeIsActive($query)
+	{
+		$query->where('active', 1);
 	}
 
 	public function getFeaturedImageUrlAttribute()

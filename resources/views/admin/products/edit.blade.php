@@ -62,6 +62,16 @@
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="long_description"> {{ old('long_description',$product->long_description) }}</textarea>
              </div>
 
+             <div class="form-check">
+                  <label class="form-check-label">
+                      Producto activo o disponible?
+                      <input class="form-check-input" name="active" value="1" type="checkbox" {{ $product->active == 1 ? 'checked' : '' }} >
+                      <span class="form-check-sign">
+                          <span class="check"></span>
+                      </span>
+                  </label>
+              </div>
+
              <button type="submit" class="btn btn-primary">Guardar Cambios</button>
              <a href="{{ url('/admin/products') }}" class="btn btn-danger">Cancelar</a>
         </form>

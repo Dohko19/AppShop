@@ -62,6 +62,7 @@ class ProductController extends Controller
         $product->description = $request->input('description');
         $product->long_description = $request->input('long_description');
         $product->category_id = $request->category_id == 0 ? null : $request->category_id;
+        $product->active = $request->active;
         $product->save();
 
         return redirect("/admin/products");
@@ -114,6 +115,8 @@ class ProductController extends Controller
             'description' =>'required|max:200',
             'price' =>'required|numeric|min:0',
         ];
+         // dd($request->active);
+
         $this->validate($request, $rules, $messages);
         $product = Product::find($id);
         $product->name = $request->input('name');
@@ -121,6 +124,8 @@ class ProductController extends Controller
         $product->description = $request->input('description');
         $product->long_description = $request->input('long_description');
         $product->category_id = $request->category_id == 0 ? null : $request->category_id;
+        $product->active = $request->active == null ? 0 : $request->active;
+
         $product->save(); //Update
 
         return redirect("/admin/products");

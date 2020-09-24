@@ -41,7 +41,6 @@ class CartDetailController extends Controller
     {
         $encuentra = CartDetail::select('product_id')->where('product_id', $request->product_id)
             ->where('cart_id', '=', auth()->user()->cart->id)->first();
-
         if ($encuentra)
         {
             if ($encuentra->product_id == $request->product_id)
